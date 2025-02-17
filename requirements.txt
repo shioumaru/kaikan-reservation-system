@@ -25,3 +25,6 @@ python_version==3.8   # Pythonのバージョンを指定
 numpy==1.21.2 
 streamlit==1.1.0 
 python_version==3.8 
+numpy==1.21.2 
+streamlit==1.1.0 
+python_version==3.8   # Pythonのバージョンを指定

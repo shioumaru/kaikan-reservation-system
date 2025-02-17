@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>予約一覧</h2>
+<ul>
+    {% for reservation in reservations %}
+        <li>{{ reservation.meeting_name }} - {{ reservation.organizer_name }} ({{ reservation.email }})<br>
+        使用開始日時: {{ reservation.start_time }}<br>
+        使用終了日時: {{ reservation.end_time }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

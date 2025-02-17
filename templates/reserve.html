@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>予約する</h2>
+<form method="POST" action="{{ url_for('reserve') }}">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.meeting_name.label }}<br>
+        {{ form.meeting_name(size=32) }}
+    </p>
+    <p>
+        {{ form.organizer_name.label }}<br>
+        {{ form.organizer_name(size=32) }}
+    </p>
+    <p>
+        {{ form.phone_number.label }}<br>
+        {{ form.phone_number(size=32) }}
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}
+    </p>
+    <p>
+        {{ form.start_time.label }}<br>
+        {{ form.start_time(class_="form-control", type="datetime-local") }}
+    </p>
+    <p>
+        {{ form.end_time.label }}<br>
+        {{ form.end_time(class_="form-control", type="datetime-local") }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

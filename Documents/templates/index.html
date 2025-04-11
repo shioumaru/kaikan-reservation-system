@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鹿住建設キッティング報告</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    h1.form-title {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    h2.section-title {
+      text-align: left;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      display: block;
+      font-size: 0.95rem;
+    }
+    .warning-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 576px) {
+      .form-control, .form-select {
+        font-size: 0.95rem;
+      }
+      .btn {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="form-title">鹿住建設キッティング報告システム</h1>
+    <form action="/submit" method="post" onsubmit="return validateForm()">
+      <div id="warning-area" class="warning-message"></div>
+
+      <h2 class="section-title">クライアント情報</h2>
+      <div class="form-group">
+        <label>管理番号:</label>
+        <input type="text" name="管理番号" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>クライアント名:</label>
+        <input type="text" name="クライアント名" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>電話番号:</label>
+        <input type="text" name="電話番号" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>指示書ナンバー:</label>
+        <input type="text" name="指示書ナンバー" class="form-control" required>
+      </div>
+
+      <h2 class="section-title">作業チェック項目</h2>
+      <div class="form-group">
+        <label>保護フィルム確認:</label>
+        <select name="保護フィルム確認" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完">完</option>
+          <option value="未">未</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>カードダブ設定確認:</label>
+        <select name="カードダブ設定確認" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完">完</option>
+          <option value="未">未</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>MDM登録:</label>
+        <select name="MDM登録" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完">完</option>
+          <option value="未">未</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>初期化:</label>
+        <select name="初期化" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完">完</option>
+          <option value="未">未</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>SIM挿入確認:</label>
+        <select name="SIM挿入確認" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完">完</option>
+          <option value="未">未</option>
+        </select>
+      </div>
+
+      <h2 class="section-title">担当者情報</h2>
+      <div class="form-group">
+        <label>作業担当者名:</label>
+        <input type="text" name="作業担当者名" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>Wチェック担当者名:</label>
+        <input type="text" name="Wチェック担当者名" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>最終チェック責任者名:</label>
+        <input type="text" name="最終チェック責任者名" class="form-control" required>
+      </div>
+
+      <h2 class="section-title">進捗状況</h2>
+      <div class="form-group">
+        <label>進捗状況:</label>
+        <select name="進捗状況" class="form-select" required>
+          <option value="">選択してください</option>
+          <option value="完了">完了</option>
+          <option value="未完了">未完了</option>
+          <option value="画面割れ">画面割れ</option>
+          <option value="端末傷">端末傷</option>
+          <option value="フィルム初期不良">フィルム初期不良</option>
+          <option value="該当端末なし">該当端末なし</option>
+          <option value="MDM配信不具合">MDM配信不具合</option>
+          <option value="アプリ欠損">アプリ欠損</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>完了日時:</label>
+        <input type="datetime-local" name="完了日時" class="form-control" id="completion_date" required>
+      </div>
+      <div class="form-group">
+        <label>備考:</label>
+        <input type="text" name="備考" class="form-control">
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary w-100">送信</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const requiredFields = document.querySelectorAll('input[required], select[required]');
+      const warningArea = document.getElementById('warning-area');
+      warningArea.innerHTML = '';
+      let hasErrors = false;
+
+      requiredFields.forEach(field => {
+        if (field.value.trim() === '') {
+          warningArea.innerHTML = '未入力または未選択の必須項目があります。';
+          hasErrors = true;
+        }
+      });
+
+      if (hasErrors) return false;
+
+      const checkItems = document.querySelectorAll('select[name="保護フィルム確認"], select[name="カードダブ設定確認"], select[name="MDM登録"], select[name="初期化"], select[name="SIM挿入確認"]');
+      let uncompletedItems = [];
+
+      checkItems.forEach(select => {
+        if (select.value === '未') {
+          const label = select.previousElementSibling;
+          uncompletedItems.push(label ? label.textContent : select.name);
+        }
+      });
+
+      if (uncompletedItems.length > 0) {
+        return confirm(`作業チェック項目に「未」があります。送信してもよろしいですか？\n\n未完了の項目: ${uncompletedItems.join(', ')}`);
+      }
+
+      return true;
+    }
+
+    // 日付入力初期値
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.getElementById('completion_date');
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mi = String(now.getMinutes()).padStart(2, '0');
+      input.value = `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+    });
+  </script>
+</body>
+</html>
